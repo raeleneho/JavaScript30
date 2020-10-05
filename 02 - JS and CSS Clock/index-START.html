@@ -74,12 +74,19 @@
   const secondHand = document.querySelector('.second-hand');
   const minsHand = document.querySelector('.min-hand');
   const hourHand = document.querySelector('.hour-hand');
+  const allHands = document.querySelectorAll('.hand');
 
   function setDate() {
     const now = new Date();
 
     const seconds = now.getSeconds();
     const secondsDegrees = ((seconds / 60) * 360) + 90;
+    // resets the inline style by removing it so the element can revert back to the stylesheet.
+    if(secondsDegrees === 90) {
+      allHands.forEach(hand => hand.style.transition = 'none')
+    } else {
+      allHands.forEach(hand => hand.style.transition = '')
+    }
     secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
     const mins = now.getMinutes();
